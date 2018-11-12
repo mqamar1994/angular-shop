@@ -1,19 +1,13 @@
 <div class="row">
   <div class="col-md-6">
-    <div *ngIf="product.title" class="card" style="width: 18rem;">
-      <img class="card-img-top" [src]="product.imageUrl" *ngIf="product.imageUrl">
-      <div class="card-body">
-        <h5 class="card-title">{{ product.title }}</h5>
-        <p class="card-text">{{ product.price | currency:'CAD':true }}</p>
-        <p class="card-text">{{ product.category }}</p>
-      </div>
-    </div>
+    <product-card [product]="product" [show-actions]="false"></product-card>
   </div>
   <div class="col-md-6">
     <form #f="ngForm" (ngSubmit)="save(f.value)">
       <div class="form-group">
         <label for="title">Title</label>
-        <input #title="ngModel" [(ngModel)]="product.title" name="title" id="title" type="text" class="form-control" required>
+        <input #title="ngModel" [(ngModel)]="product.title" name="title" id="title" type="text" class="form-control"
+          required>
         <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
           Title is required.
         </div>
@@ -22,7 +16,8 @@
         <label for="price">Price</label>
         <div class="input-group-prepend">
           <span class="input-group-text">CA$</span>
-          <input #price="ngModel" [(ngModel)]="product.price" name="price" id="price" type="number" class="form-control" required [min]="0">
+          <input #price="ngModel" [(ngModel)]="product.price" name="price" id="price" type="number" class="form-control"
+            required [min]="0">
         </div>
         <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
           <div *ngIf="price.errors.required">Price is required.</div>
@@ -31,7 +26,8 @@
       </div>
       <div class="form-group">
         <label for="category">Category</label>
-        <select #category="ngModel" [(ngModel)]="product.category" name="category" id="category" class="form-control" required>
+        <select #category="ngModel" [(ngModel)]="product.category" name="category" id="category" class="form-control"
+          required>
           <option value=""></option>
           <option *ngFor="let c of categories$ | async" [value]="c.key">
             {{ c.name }}

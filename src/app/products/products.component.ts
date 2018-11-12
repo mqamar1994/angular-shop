@@ -1,5 +1,4 @@
 import { ActivatedRoute } from '@angular/router';
-import { CategoryService } from './../category.service';
 import { Component } from '@angular/core';
 import { ProductService } from '../product.service';
 
@@ -12,10 +11,9 @@ export class ProductsComponent {
 
     products: any[] = [];
     filteredProducts: any[] = [];
-    categories$;
     category: string;
 
-    constructor(route: ActivatedRoute, productService: ProductService, categoryService: CategoryService) {
+    constructor(route: ActivatedRoute, productService: ProductService) {
         productService
             .getAll().subscribe(products => {
                 this.products = products;
@@ -28,6 +26,5 @@ export class ProductsComponent {
                 });
             });
 
-        this.categories$ = categoryService.getAll();
     }
 }
